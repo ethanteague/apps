@@ -1,0 +1,131 @@
+<template name="main">
+  <main>
+    {{> aboveContainer}}
+    <div class="container">
+      {{> Template.dynamic template=top}}
+      {{> Template.dynamic template=content}}
+      {{> Template.dynamic template=bottom}}
+    </div>
+  </main>
+</template>
+
+<template name="aboveContainer">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Events</a>
+      <a class="navbar-brand" href="/event">Create Events</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        {{> register}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+<template name="header">
+  {{#if currentUser}}
+    <h2>{{> userName}}'s events
+    </h2>
+    {{else}}
+    <h2>Login to see events</h2>
+  {{/if}}
+</template>
+
+<template name="register">
+  {{#if currentUser}}
+    <!--{{> dropzone }}-->
+
+    {{> loginButtons}}
+    {{else}}
+  <li id="register-dropdown-list" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Register
+      <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu">
+      <form id="register-form" action="action">
+        <div>
+          <input type="email" id="register-email" placeholder="Email" class="form-control"/>
+          <input type="password" id="register-password" placeholder="Password" class="form-control"/>
+          <input type="firstName" id="register-first" placeholder="First" class="form-control"/>
+
+          <input type="lastName" id="register-last" placeholder="Last" class="form-control"/>
+          <input type="submit" id="register-button" class="btn btn-primary col-xs-12 col-sm-12" value="Register"/>
+        </div>
+      </form>
+    </div>
+  </li>
+  <li id="register-dropdown-list" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Sign In
+      <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu">
+      <form id="login-form" action="action">
+        <div>
+          <input id="login-email" type="email" placeholder="Email" class="form-control">
+          <input id="login-password" type="password" placeholder="Password" class="form-control">
+          <input type="submit" id="login-button" class="btn btn-primary col-xs-12 col-sm-12" value="Sign In"/>
+        </div>
+      </form>
+      <div id="login-other-options">
+        <a id="forgot-password-link" class="pull-left">Forgot password?</a>
+      </div>
+    </div>
+  </li>
+{{/if}}
+</template>
+
+<template name="standard_login">
+{{> loginButtons}}
+</template>
+
+<template name="insertEventForm">
+{{> quickForm collection="Events" id="insertEventForm" type="insert"}}
+</template>
+
+<template name="eventOutput">
+<ul>
+  {{#if invites}}
+    <h4>My invites</h4>
+    {{#each invites}}
+      <li>{{title}}</li>
+      <li>{{address.formattedAddress}}</li>
+      <li>{{when}}</li>
+      <hr/>
+    {{/each}}
+  {{/if}}
+</ul>
+
+<ul>
+  {{#if invitations}}
+    <h4>My invitations</h4>
+    {{#each invitations}}
+      <li>{{title}}</li>
+      <li>{{address.formattedAddress}}</li>
+      <li>{{when}}</li>
+      <hr/>
+    {{/each}}
+  {{/if}}
+</ul>
+</template>
+
+<template name="userName">
+{{currentUser.profile.firstName}}
+{{currentUser.profile.lastName}}
+</template>
+
+<template name="userDir">
+<ul>
+  {{#each name}}
+    <li>{{profile.firstName}}
+      {{profile.lastName}}
+      {{emails.[0].address}}</li>
+  {{/each}}
+</ul>
+</template>
