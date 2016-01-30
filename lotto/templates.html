@@ -31,15 +31,18 @@
 </template>
 
 <template name="pollGrab">
-
-  {{#each data}}
   <ul>
-    <li>{{this.game}}</li>
-    <li>{{this.winnum}}</li>
-    <li>{{this.drawdate}}</li>
+    {{#each data}}
+      <li>
+        <strong>Game:</strong>
+        {{this.game}}</li>
+      <li>Draw Date:
+        {{this.drawdate}}</li>
+      <li>Winning Number:
+        <span class="red">{{this.winnum}}</span></li>
+      <hr/>
+    {{/each}}
   </ul>
-  {{/each}}
-
 </template>
 
 <template name="standard_login">
