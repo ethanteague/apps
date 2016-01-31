@@ -26,7 +26,7 @@
           });
           Session.set("games", title);
         });
-      }, 20000);
+      }, 120000); // Poll every two minutes.
       return Session.get("games");
     }
   });
