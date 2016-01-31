@@ -7,3 +7,16 @@ Meteor.methods({
     return Stream;
   }
 });
+
+var games = new Mongo.Collection("games");
+games.allow({
+  insert: function(){
+    return true;
+  },
+  update: function(){
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
+});
