@@ -2,7 +2,8 @@
 //inside a meteor method
 Meteor.methods({
   "stream": function(){
-    var Stream = HTTP.get("http://www.flalottery.com/video/en/theWinningNumber.xml");
+    // For launch set to http://www.flalottery.com/video/en/theWinningNumber.xml.
+    var Stream = HTTP.get("http://virtualputty.com/test/sample.xml");
     return Stream;
   }
 });
