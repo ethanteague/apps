@@ -1,41 +1,26 @@
 // Collections
 
-Events = new Mongo.Collection("events");
-Events.attachSchema(new SimpleSchema({
-  creator: {
-    type: String,
-    autoValue: function() {
-      return Meteor.userId();
-    },
-    autoform: {
-      type: 'hidden',
-    }
-  },
+LottoGames = new Mongo.Collection("LottoGames");
+LottoGames.attachSchema(new SimpleSchema({
   title: {
     type: String,
-    label: "Title",
-    max: 200
   },
-  summary: {
+  date: {
     type: String,
-    label: "Details",
-    optional: true,
-    max: 1000
+  },
+  nums: {
+    type: String,
   }
 }));
 
-//SECURITY - Allow Callbacks for posting
-Events.allow({
-  insert: function(userId, doc) {
-    // only allow posting if you are logged in
-    return !!userId;
+LottoGames.allow({
+  insert: function(){
+    return true;
   },
-  update: function(userId, doc) {
-    //only allow updating if you are owner
-    return doc.submittedById === Meteor.userId();
+  update: function(){
+    return true;
   },
-  remove: function(userID, doc) {
-    //only allow deleting if you are owner
-    return doc.submittedById === Meteor.userId();
+  remove: function(){
+    return true;
   }
 });

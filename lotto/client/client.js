@@ -3,6 +3,11 @@
     BlazeLayout.setRoot("body");
   })
 
+  // Subscriptions
+  Tracker.autorun(function() {
+    Meteor.subscribe('LottoGames');
+  });
+
   // Grab our results.
   function callLotto() {
     var title = [];
@@ -19,6 +24,7 @@
             "winnum": winnum,
             "drawdate": drawdate
           });
+          LottoGames.insert({title: game, date: drawdate, nums: winnum});
         }
       });
       Session.set("games", title);
@@ -31,7 +37,8 @@
       callLotto(); // Need to initiate on page load.
       Meteor.setInterval(function() {
         callLotto();
-      }, 120000); // Poll every two minutes.
+      }, 1111111120000); // Poll every two minutes, set to 120000.
+
       return Session.get("games");
     }
   });
