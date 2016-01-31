@@ -31,7 +31,7 @@
       callLotto(); // Need to initiate on page load.
       Meteor.setInterval(function() {
         callLotto();
-      }, 20000); // Poll every two minutes.
+      }, 120000); // Poll every two minutes.
       return Session.get("games");
     }
   });
