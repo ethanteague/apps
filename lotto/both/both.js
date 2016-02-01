@@ -1,12 +1,11 @@
 // Collections
-
 LottoGames = new Mongo.Collection("LottoGames");
 LottoGames.attachSchema(new SimpleSchema({
   title: {
     type: String,
   },
   date: {
-    type: String,
+    type: Date,
   },
   nums: {
     type: String,

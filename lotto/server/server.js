@@ -1,6 +1,4 @@
-Meteor.publish('LottoGames', function() {
-  return LottoGames.find();
-})
+
 //inside a meteor method
 Meteor.methods({
   "stream": function(){

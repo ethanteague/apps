@@ -3,11 +3,6 @@
     BlazeLayout.setRoot("body");
   })
 
-  // Subscriptions
-  Tracker.autorun(function() {
-    Meteor.subscribe('LottoGames');
-  });
-
   // Grab our results.
   function callLotto() {
     var title = [];
@@ -16,15 +11,18 @@
         xml = $(xml);
       xml.find("item").each(function(i, j) {
         if ($(j).attr("winnum") && $(j).attr("windd")) {
-          game = $(j).attr("game").toUpperCase();
-          winnum = $(j).attr("winnum");
+          var game = $(j).attr("game").toUpperCase(),
+          winnum = $(j).attr("winnum"),
           drawdate = $(j).attr("windd");
+          thisObj = LottoGames.find({["date"]: Date(drawdate), ["title"]: "POWERBALL", ["_id"] : "8k2EsNJhYzavbBjcj"}).fetch(title);
+          console.log(thisObj);
           title.push({
             "game": game,
             "winnum": winnum,
             "drawdate": drawdate
           });
-          LottoGames.insert({title: game, date: drawdate, nums: winnum});
+          LottoGames.insert({title: game, date: new Date(drawdate), nums: winnum});
+
         }
       });
       Session.set("games", title);
@@ -37,7 +35,7 @@
       callLotto(); // Need to initiate on page load.
       Meteor.setInterval(function() {
         callLotto();
-      }, 1111111120000); // Poll every two minutes, set to 120000.
+      }, 99991111111120000); // Poll every two minutes, set to 120 * 1000.
 
       return Session.get("games");
     }
